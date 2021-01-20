@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import Modal from './UserCards/Modal';
+import UserCards from "./UserCards/UserCards";
+import React,  { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component { 
+  state = {
+    isOpenModal: false,
+    id: 0,
+  };
+  
+  getData = a => {
+    this.setState({ id: a.currentTarget.id });
+    this.toggleModal();
+  };
+
+  toggleModal = () => {
+    this.setState({ isOpenModal: !this.state.isOpenModal });
+  }
+
+  render() {
+    const { isOpenModal, id } = this.state;
+    console.log(isOpenModal);
+
+    return (
+      <div>
+        <UserCards openModal={this.getData}/>
+        {isOpenModal && <Modal onClick={this.toggleModal} id={id}/>}
+      </div>
+    );
+  }
+};
 
 export default App;
