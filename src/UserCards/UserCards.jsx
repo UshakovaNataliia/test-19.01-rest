@@ -36,10 +36,7 @@ const UserCards = ({openModal}) => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts/`)
       .then(({ data }) => setUsers(data))
-      .catch(error => {
-        setError(error);
-        alert(error);
-      });
+      .catch(error => setError(()=>alert(error)));
     
   }, []);
 
